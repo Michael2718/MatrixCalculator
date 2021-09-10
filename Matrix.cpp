@@ -47,6 +47,18 @@ Matrix &Matrix::operator=(const Matrix &rhs) {
     return  *this;
 }
 
+// Addition of two matrices
+Matrix Matrix::operator+(const Matrix &rhs) {
+    Matrix result (rows, cols);
+
+    for (int i = 0;  i < rows; i++){
+        for (int j = 0; j < cols; j++) {
+            result(i, j) = this->matrix[i][j] + rhs(i, j);
+        }
+    }
+    return result;
+}
+
 // Access the individual elements
 double &Matrix::operator()(const unsigned int &row, const unsigned int &col) {
     return this->matrix[row][col];

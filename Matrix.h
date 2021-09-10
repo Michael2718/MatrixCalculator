@@ -15,9 +15,9 @@ public:
 
     // Operator overloading for "standard" mathematical matrix operations
     Matrix& operator=(const Matrix& rhs);
-//
-//    // Mathematical operations
-//    Matrix operator+(const Matrix& rhs);
+
+    // Mathematical operations
+    Matrix operator+(const Matrix& rhs);
 //    Matrix operator-(const Matrix& rhs);
 //    Matrix operator*(const Matrix& rhs);
 //
