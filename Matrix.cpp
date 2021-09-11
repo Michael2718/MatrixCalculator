@@ -11,6 +11,22 @@ Matrix::Matrix(unsigned int _rows, unsigned int _cols) {
     cols = _cols;
 }
 
+// Vector constructor
+Matrix::Matrix(std::vector<std::vector<double>> v) {
+    matrix.resize(v.size());
+    for (auto & i : matrix) {
+        i.resize(v[0].size());
+    }
+
+    rows = matrix.size();
+    cols = matrix[0].size();
+
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            matrix[i][j] = v[i][j];
+        }
+    }
+}
 // Copy Constructor
 Matrix::Matrix(const Matrix& rhs) {
     matrix = rhs.matrix;
@@ -56,6 +72,65 @@ Matrix Matrix::operator+(const Matrix &rhs) {
             result(i, j) = this->matrix[i][j] + rhs(i, j);
         }
     }
+
+    return result;
+}
+
+// Subtraction of two matrices
+Matrix Matrix::operator-(const Matrix &rhs) {
+    Matrix result (rows, cols);
+
+    for (int i = 0;  i < rows; i++){
+        for (int j = 0; j < cols; j++) {
+            result(i, j) = this->matrix[i][j] - rhs(i, j);
+        }
+    }
+
+    return result;
+}
+
+// Multiplication of two matrices
+Matrix Matrix::operator*(const Matrix &rhs) {
+    if (cols != rhs.rows && cols) {
+        std::cout << "Impossible to calculate multiplication, columns != ";
+        return;
+    }
+    Matrix result (rows, cols);
+
+    for (int i = 0; i < rhs.rows; ++i) {
+        for (int j = 0; j < rhs.cols; ++j) {
+            for (int k = 0; k < rhs.rows; ++k) {
+                result(i, j) += this->matrix[i][k] * rhs(k, j);
+            }
+        }
+    }
+
+    return result;
+}
+
+// Transpose of matrix
+Matrix Matrix::transpose() {
+    Matrix result (rows, cols);
+
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            result(i, j) = this->matrix[j][i];
+        }
+    }
+
+    return result;
+}
+
+// Scalar multiplication
+Matrix Matrix::operator*(const double &rhs) {
+    Matrix result(rows, cols);
+
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            result(i, j) = this->matrix[i][j] * rhs;
+        }
+    }
+
     return result;
 }
 

@@ -10,6 +10,7 @@ private:
     unsigned int cols;
 public:
     Matrix(unsigned int _rows, unsigned int _cols);
+    explicit Matrix(std::vector<std::vector<double> > v);
     Matrix(const Matrix& rhs);
     virtual ~Matrix();
 
@@ -18,14 +19,16 @@ public:
 
     // Mathematical operations
     Matrix operator+(const Matrix& rhs);
-//    Matrix operator-(const Matrix& rhs);
-//    Matrix operator*(const Matrix& rhs);
-//
-//    // Scalar operations
+    Matrix operator-(const Matrix& rhs);
+    Matrix operator*(const Matrix& rhs);
+    Matrix transpose();
+
+    // Scalar operations
+    Matrix operator*(const double& rhs);
 //    Matrix operator+(const double& rhs);
 //    Matrix operator-(const double& rhs);
-//    Matrix operator*(const double& rhs);
-//    // Access the individual elements
+
+    // Access the individual elements
     double& operator()(const unsigned& row, const unsigned& col);
     const double& operator()(const unsigned& row, const unsigned& col) const;
 };
