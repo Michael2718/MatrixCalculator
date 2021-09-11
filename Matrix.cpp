@@ -143,3 +143,13 @@ double &Matrix::operator()(const unsigned int &row, const unsigned int &col) {
 const double &Matrix::operator()(const unsigned int &row, const unsigned int &col) const {
     return this->matrix[row][col];
 }
+
+void Matrix::print() {
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            std::cout << matrix[i][j] << " ";
+        }
+        std::cout << std::endl;
+    }
+}
+

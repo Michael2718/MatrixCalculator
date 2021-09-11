@@ -22,6 +22,7 @@ public:
     Matrix operator-(const Matrix& rhs);
     Matrix operator*(const Matrix& rhs);
     Matrix transpose();
+//    Matrix operator^(const Matrix& rhs);
 
     // Scalar operations
     Matrix operator*(const double& rhs);
@@ -31,6 +32,9 @@ public:
     // Access the individual elements
     double& operator()(const unsigned& row, const unsigned& col);
     const double& operator()(const unsigned& row, const unsigned& col) const;
+
+    // Print
+    void print();
 };
 
 #endif
