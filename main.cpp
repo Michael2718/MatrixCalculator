@@ -8,16 +8,9 @@ int main() {
     std::vector<std::vector<double> > v1 = {{1, -1},
                                             {2, 0},
                                             {3, 0}};
+    std::vector<std::vector<double> > v2 = {{1, 3, 4, 5}};
     Matrix a = Matrix(v1);
-    Matrix b = a * 3;
-    //Matrix b = a.transpose();
-    //Matrix b = Matrix(m,n);
-    for (int i = 0; i < m; ++i) {
-        for (int j = 0; j < n; ++j) {
-            //b(i, j) = 2;
-        }
-    }
-    //Matrix c = a * b;
-    //std::cout << c;
+    Matrix b = Matrix(v2);
+    Matrix c = a * b;
     return 0;
 }

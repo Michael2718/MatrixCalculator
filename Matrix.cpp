@@ -92,9 +92,9 @@ Matrix Matrix::operator-(const Matrix &rhs) {
 // Multiplication of two matrices
 Matrix Matrix::operator*(const Matrix &rhs) {
     if (cols != rhs.rows && cols) {
-        std::cout << "Impossible to calculate multiplication, columns != ";
-        return;
+        std::cerr << "Impossible to calculate multiplication, columns of first matrix != rows of second\n";
     }
+
     Matrix result (rows, cols);
 
     for (int i = 0; i < rhs.rows; ++i) {
