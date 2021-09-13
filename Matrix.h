@@ -22,7 +22,7 @@ public:
     Matrix operator-(const Matrix& rhs);
     Matrix operator*(const Matrix& rhs);
     Matrix transpose();
-//    Matrix operator^(const Matrix& rhs);
+
 
     // Scalar operations
     Matrix operator*(const double& rhs);

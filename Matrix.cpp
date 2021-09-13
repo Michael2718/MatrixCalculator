@@ -27,6 +27,7 @@ Matrix::Matrix(std::vector<std::vector<double>> v) {
         }
     }
 }
+
 // Copy Constructor
 Matrix::Matrix(const Matrix& rhs) {
     matrix = rhs.matrix;
@@ -91,11 +92,10 @@ Matrix Matrix::operator-(const Matrix &rhs) {
 
 // Multiplication of two matrices
 Matrix Matrix::operator*(const Matrix &rhs) {
-    if (cols != rhs.rows && cols) {
+    if (cols != rhs.rows) {
         std::cerr << "Impossible to calculate multiplication, columns of first matrix != rows of second\n";
     }
-
-    Matrix result (rows, cols);
+    Matrix result (rows, rhs.cols);
 
     for (int i = 0; i < rhs.rows; ++i) {
         for (int j = 0; j < rhs.cols; ++j) {
@@ -110,11 +110,11 @@ Matrix Matrix::operator*(const Matrix &rhs) {
 
 // Transpose of matrix
 Matrix Matrix::transpose() {
-    Matrix result (rows, cols);
+    Matrix result (cols, rows);
 
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < cols; ++j) {
-            result(i, j) = this->matrix[j][i];
+            result(j, i) = this->matrix[i][j];
         }
     }
 
@@ -144,6 +144,7 @@ const double &Matrix::operator()(const unsigned int &row, const unsigned int &co
     return this->matrix[row][col];
 }
 
+// Print
 void Matrix::print() {
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < cols; ++j) {
@@ -152,4 +153,3 @@ void Matrix::print() {
         std::cout << std::endl;
     }
 }
-
