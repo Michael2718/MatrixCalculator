@@ -1,6 +1,5 @@
 #include <iostream>
 #include "Matrix.h"
-#include <vector>
 
 Matrix matrix_input() {
     unsigned int m, n;
