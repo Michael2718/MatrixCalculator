@@ -19,8 +19,10 @@ Matrix matrix_input() {
 
 int main() {
     char op;
+    //Matrix a = Matrix({{1, 2, 3, 4, 2}, {-5, 2, 1, 2, -3}, {2, 1, 4, -1, 1}, {3, 2, 1, 5, 2}, {1, 4, 1, 2, 5}});
+    //std::cout << "Determinant: " << a.determinant();
     Matrix a = matrix_input();
-    std::cout << "Оператор(+, -, *, T(транспонирование):\n";
+    std::cout << "Оператор(+, -, *, T(транспонирование), D(определитель):\n";
     std::cin >> op;
 
     if (op == '+') {
@@ -54,6 +56,8 @@ int main() {
         Matrix b = a.transpose();
         std::cout << "Результат:\n";
         b.print();
+    } else if (op == 'D') {
+        std::cout << a.determinant();
     }
     return 0;
 }
