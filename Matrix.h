@@ -22,7 +22,10 @@ public:
     Matrix operator-(const Matrix& rhs);
     Matrix operator*(const Matrix& rhs);
     Matrix transpose();
+    Matrix invertible();
     double determinant();
+    double minor(int a, int b);
+
 
     // Scalar operations
     Matrix operator*(const double& rhs);

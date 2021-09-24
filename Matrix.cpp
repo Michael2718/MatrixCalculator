@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 #include "Matrix.h"
 
 // Parameter constructor
@@ -147,7 +148,7 @@ double Matrix::determinant() {
         det *= matrix[i][i];
     }
 
-    return det;
+    return (int)det;
 }
 
 // Scalar multiplication
@@ -181,4 +182,24 @@ void Matrix::print() {
         }
         std::cout << std::endl;
     }
+}
+
+// Invertible Matrix
+Matrix Matrix::invertible() {
+    Matrix adjugateMatrix(rows, cols);
+    for (int i = 0; i < matrix.size(); ++i) {
+        for (int j = 0; j < matrix.size(); ++j) {
+            adjugateMatrix(i, j) = pow(-1, i+j)*this->minor(i, j);
+        }
+    }
+    return adjugateMatrix.transpose();
+}
+
+// Extra minor
+double Matrix::minor(int a, int b) {
+    matrix.erase(matrix.begin()+a);
+    for (std::vector<double> &i: matrix) {
+        i.erase(i.begin() + b);
+    }
+    return this->determinant();
 }
