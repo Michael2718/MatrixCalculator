@@ -185,7 +185,7 @@ void Matrix::print() {
 }
 
 // Invertible Matrix
-Matrix Matrix::invertible() {
+Matrix Matrix::inverse() {
     Matrix adjugateMatrix(rows, cols);
     for (int i = 0; i < matrix.size(); ++i) {
         for (int j = 0; j < matrix.size(); ++j) {
