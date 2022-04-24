@@ -39,7 +39,7 @@ int main() {
         Matrix c = a - b;
         std::cout << "Результат:\n";
         c.print();
-    } else if (op =='*') {
+    } else if (op == '*') {
         char ch;
         std::cout << "Умножение на матрицу или на число? (1 - Матрица, 2 - Число)\n";
         std::cin >> ch;
@@ -62,6 +62,9 @@ int main() {
         b.print();
     } else if (op == 'D') {
         std::cout << a.determinant();
+    } else if (op == 'I') {
+        Matrix b = a.inverse();
+        b.print();
     }
     return 0;
 }

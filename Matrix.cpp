@@ -98,9 +98,9 @@ Matrix Matrix::operator*(const Matrix &rhs) {
     }
     Matrix result (rows, rhs.cols);
 
-    for (int i = 0; i < rhs.rows; ++i) {
+    for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < rhs.cols; ++j) {
-            for (int k = 0; k < rhs.rows; ++k) {
+            for (int k = 0; k < cols; ++k) {
                 result(i, j) += this->matrix[i][k] * rhs(k, j);
             }
         }
