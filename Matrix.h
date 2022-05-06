@@ -3,40 +3,38 @@
 
 #include <vector>
 
+using std::vector;
+
 class Matrix{
 private:
-    std::vector<std::vector<double> > matrix;
+    vector<vector<double> > matrix;
     unsigned int rows;
     unsigned int cols;
 public:
-    Matrix(unsigned int _rows, unsigned int _cols);
-    explicit Matrix(std::vector<std::vector<double> > v);
-    Matrix(const Matrix& rhs);
-    virtual ~Matrix();
+    Matrix();
+    Matrix(unsigned int rows, unsigned int cols);
+    explicit Matrix(vector<vector<double> > v);
+    Matrix(const Matrix& rhs) = default;
 
-    // Operator overloading for "standard" mathematical matrix operations
-    Matrix& operator=(const Matrix& rhs);
+    unsigned int getRows() const {return rows;}
+    unsigned int getCols() const {return cols;}
 
-    // Mathematical operations
+    Matrix& operator=(const Matrix& rhs) {return *this;}
     Matrix operator+(const Matrix& rhs);
     Matrix operator-(const Matrix& rhs);
     Matrix operator*(const Matrix& rhs);
+
+    Matrix operator*(const double& rhs);
+
     Matrix transpose();
     Matrix inverse();
+
     double determinant();
     double minor(int a, int b);
 
-
-    // Scalar operations
-    Matrix operator*(const double& rhs);
-//    Matrix operator+(const double& rhs);
-//    Matrix operator-(const double& rhs);
-
-    // Access the individual elements
     double& operator()(const unsigned& row, const unsigned& col);
     const double& operator()(const unsigned& row, const unsigned& col) const;
 
-    // Print
     void print();
 };
 

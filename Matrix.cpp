@@ -1,72 +1,23 @@
+#include "Matrix.h"
 #include <iostream>
 #include <cmath>
-#include "Matrix.h"
 
-// Parameter constructor
-Matrix::Matrix(unsigned int _rows, unsigned int _cols) {
-    matrix.resize(_rows);
-    for (auto & i : matrix) {
-        i.resize(_cols);
-    }
-    rows = _rows;
-    cols = _cols;
+using std::invalid_argument;
+
+Matrix::Matrix() : rows(0), cols(0) {}
+
+Matrix::Matrix(unsigned int rows, unsigned int cols)
+    : matrix(vector<vector<double>>(rows, vector<double>(cols))), rows(rows), cols(cols) {
+    if (rows < 0 || cols < 0) throw invalid_argument("Invalid matrix size.");
 }
 
-// Vector constructor
-Matrix::Matrix(std::vector<std::vector<double>> v) {
-    matrix.resize(v.size());
-    for (auto & i : matrix) {
-        i.resize(v[0].size());
-    }
-
-    rows = matrix.size();
-    cols = matrix[0].size();
-
-    for (int i = 0; i < rows; ++i) {
-        for (int j = 0; j < cols; ++j) {
-            matrix[i][j] = v[i][j];
-        }
-    }
+Matrix::Matrix(vector<vector<double>> v) : matrix(v), rows(v.size()), cols(v[0].size()){
+    if (rows < 0 || cols < 0) throw invalid_argument("Invalid matrix size.");
 }
 
-// Copy Constructor
-Matrix::Matrix(const Matrix& rhs) {
-    matrix = rhs.matrix;
-    rows = rhs.rows;
-    cols = rhs.cols;
-}
-
-// (Virtual) Destructor
-Matrix::~Matrix() = default;
-
-// Assignment Operator
-Matrix &Matrix::operator=(const Matrix &rhs) {
-    if (&rhs == this) {
-        return *this;
-    }
-
-    unsigned int new_rows = rhs.rows;
-    unsigned int new_cols = rhs.cols;
-
-    matrix.resize(new_rows);
-    for (auto & i : matrix) {
-        i.resize(new_cols);
-    }
-
-    for (int i = 0; i < new_rows; i++) {
-        for (int j = 0; j < new_cols; j++) {
-            matrix[i][j] = rhs(i, j);
-        }
-    }
-
-    rows = new_rows;
-    cols = new_cols;
-
-    return  *this;
-}
-
-// Addition of two matrices
 Matrix Matrix::operator+(const Matrix &rhs) {
+    if(rows != rhs.rows || cols != rhs.cols) throw invalid_argument("Invalid matrix size.");
+
     Matrix result (rows, cols);
 
     for (int i = 0;  i < rows; i++){
@@ -78,8 +29,9 @@ Matrix Matrix::operator+(const Matrix &rhs) {
     return result;
 }
 
-// Subtraction of two matrices
 Matrix Matrix::operator-(const Matrix &rhs) {
+    if(rows != rhs.rows || cols != rhs.cols) throw invalid_argument("Invalid matrix size.");
+
     Matrix result (rows, cols);
 
     for (int i = 0;  i < rows; i++){
@@ -91,16 +43,14 @@ Matrix Matrix::operator-(const Matrix &rhs) {
     return result;
 }
 
-// Multiplication of two matrices
 Matrix Matrix::operator*(const Matrix &rhs) {
-    if (cols != rhs.rows) {
-        std::cerr << "Impossible to calculate multiplication, columns of first matrix != rows of second\n";
-    }
+    if (cols != rhs.rows) throw invalid_argument("Invalid matrix size.");
+
     Matrix result (rows, rhs.cols);
 
-    for (int i = 0; i < rows; ++i) {
-        for (int j = 0; j < rhs.cols; ++j) {
-            for (int k = 0; k < cols; ++k) {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < rhs.cols; j++) {
+            for (int k = 0; k < cols; k++) {
                 result(i, j) += this->matrix[i][k] * rhs(k, j);
             }
         }
@@ -109,7 +59,6 @@ Matrix Matrix::operator*(const Matrix &rhs) {
     return result;
 }
 
-// Transpose of matrix
 Matrix Matrix::transpose() {
     Matrix result (cols, rows);
 

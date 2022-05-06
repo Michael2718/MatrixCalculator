@@ -1,16 +1,18 @@
 #include <iostream>
 #include "Matrix.h"
 
+using std::cout, std::cin;
+
 Matrix matrix_input() {
     unsigned int m, n;
 
-    std::cout << "Размеры матрицы через пробел: ";
-    std::cin >> m >> n;
-    std::cout << "Матрица:\n";
+    cout << "Размеры матрицы через пробел: ";
+    cin >> m >> n;
+    cout << "Матрица:\n";
     Matrix a = Matrix(m, n);
     for (int i = 0; i < m; ++i) {
         for (int j = 0; j < n; ++j) {
-            std::cin >> a(i, j);
+            cin >> a(i, j);
         }
     }
 
@@ -18,21 +20,15 @@ Matrix matrix_input() {
 }
 
 int main() {
-    char op;
-    //Matrix a = Matrix({{1, 2, 3, 4, 2}, {-5, 2, 1, 2, -3}, {2, 1, 4, -1, 1}, {3, 2, 1, 5, 2}, {1, 4, 1, 2, 5}});
-    //Matrix a = Matrix({{2, 7, 3}, {3, 9, 4}, {1, 5, 3}});
-    //std::cout << "Determinant: " << a.determinant();
-    //Matrix a = Matrix({{1, 2, 3}, {-1, 0, 2}, {0, 1, 4}});
-    // std::cout << a.determinant() << std::endl;
-    //a.invertible().print();
+/*    char op;
     Matrix a = matrix_input();
-    std::cout << "Оператор(+, -, *, T(транспонирование), D(определитель):\n";
-    std::cin >> op;
+    cout << "Оператор(+, -, *, T(транспонирование), D(определитель):\n";
+    cin >> op;
 
     if (op == '+') {
-        Matrix b = matrix_input();;
+        Matrix b = matrix_input();
         Matrix c = a + b;
-        std::cout << "Результат:\n";
+        cout << "Результат:\n";
         c.print();
     } else if (op == '-') {
         Matrix b = matrix_input();
@@ -65,6 +61,11 @@ int main() {
     } else if (op == 'I') {
         Matrix b = a.inverse();
         b.print();
-    }
+    }*/
+    Matrix a({{2, -3, 1}, {1, 0, 3}});
+    Matrix b({{-6, 5, 1, 1}, {2, 1, 0, 4}, {7, 1, 2, 5}});
+    Matrix c = a * b;
+    c.print();
+    //b.print();
     return 0;
 }
