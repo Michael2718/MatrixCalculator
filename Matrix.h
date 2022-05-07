@@ -2,8 +2,9 @@
 #define MATRIXCALCULATOR_MATRIX_H
 
 #include <vector>
+#include <iostream>
 
-using std::vector;
+using std::vector, std::ostream;
 
 class Matrix{
 private:
@@ -26,16 +27,18 @@ public:
 
     Matrix operator*(const double& rhs);
 
+    friend ostream& operator<<(ostream& os, const Matrix& matrix);
+
+    double& operator()(const unsigned& row, const unsigned& col) {return this->matrix[row][col];}
+    const double& operator()(const unsigned& row, const unsigned& col) const {return this->matrix[row][col];}
+
     Matrix transpose();
     Matrix inverse();
 
     double determinant();
     double minor(int a, int b);
 
-    double& operator()(const unsigned& row, const unsigned& col);
-    const double& operator()(const unsigned& row, const unsigned& col) const;
 
-    void print();
 };
 
 #endif

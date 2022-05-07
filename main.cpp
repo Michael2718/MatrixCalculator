@@ -62,10 +62,11 @@ int main() {
         Matrix b = a.inverse();
         b.print();
     }*/
-    Matrix a({{2, -3, 1}, {1, 0, 3}});
-    Matrix b({{-6, 5, 1, 1}, {2, 1, 0, 4}, {7, 1, 2, 5}});
-    Matrix c = a * b;
-    c.print();
+/*    Matrix a({{2, -3, 1}, {1, 0, 3}});
+    Matrix b({{-6, 5, 1, 1}, {2, 1, 0, 4}, {7, 1, 2, 5}});*/
+    Matrix a({{1,1}, {1,1}});
+    Matrix c = a * 3;
+    cout << c;
     //b.print();
     return 0;
 }

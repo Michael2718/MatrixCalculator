@@ -59,6 +59,29 @@ Matrix Matrix::operator*(const Matrix &rhs) {
     return result;
 }
 
+Matrix Matrix::operator*(const double &rhs) {
+    Matrix result(rows, cols);
+
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            result(i, j) = this->matrix[i][j] * rhs;
+        }
+    }
+
+    return result;
+}
+
+ostream& operator<<(ostream& os, const Matrix& matrix) {
+    for (int i = 0; i < matrix.rows; i++) {
+        for (int j = 0; j < matrix.cols; j++) {
+            os << matrix(i, j);
+            if (j < matrix.cols-1) os << " ";
+        }
+        if (i < matrix.rows-1) os << "\n";
+    }
+    return os;
+}
+
 Matrix Matrix::transpose() {
     Matrix result (cols, rows);
 
@@ -71,9 +94,18 @@ Matrix Matrix::transpose() {
     return result;
 }
 
-// Determinant
+Matrix Matrix::inverse() {
+    Matrix adjugate_matrix(rows, cols);
+    for (int i = 0; i < matrix.size(); ++i) {
+        for (int j = 0; j < matrix.size(); ++j) {
+            adjugate_matrix(i, j) = pow(-1, i+j)*this->minor(i, j);
+        }
+    }
+    return adjugate_matrix.transpose();
+}
+
 double Matrix::determinant() {
-    double det = 1, coefficient = 0;
+    double det = 1, coefficient;
 
     if (matrix.size() == 1) {
         return matrix[0][0];
@@ -100,54 +132,9 @@ double Matrix::determinant() {
     return (int)det;
 }
 
-// Scalar multiplication
-Matrix Matrix::operator*(const double &rhs) {
-    Matrix result(rows, cols);
-
-    for (int i = 0; i < rows; ++i) {
-        for (int j = 0; j < cols; ++j) {
-            result(i, j) = this->matrix[i][j] * rhs;
-        }
-    }
-
-    return result;
-}
-
-// Access the individual elements
-double &Matrix::operator()(const unsigned int &row, const unsigned int &col) {
-    return this->matrix[row][col];
-}
-
-// Access the individual elements (const)
-const double &Matrix::operator()(const unsigned int &row, const unsigned int &col) const {
-    return this->matrix[row][col];
-}
-
-// Print
-void Matrix::print() {
-    for (int i = 0; i < rows; ++i) {
-        for (int j = 0; j < cols; ++j) {
-            std::cout << matrix[i][j] << " ";
-        }
-        std::cout << std::endl;
-    }
-}
-
-// Invertible Matrix
-Matrix Matrix::inverse() {
-    Matrix adjugateMatrix(rows, cols);
-    for (int i = 0; i < matrix.size(); ++i) {
-        for (int j = 0; j < matrix.size(); ++j) {
-            adjugateMatrix(i, j) = pow(-1, i+j)*this->minor(i, j);
-        }
-    }
-    return adjugateMatrix.transpose();
-}
-
-// Extra minor
 double Matrix::minor(int a, int b) {
     matrix.erase(matrix.begin()+a);
-    for (std::vector<double> &i: matrix) {
+    for (vector<double> &i: matrix) {
         i.erase(i.begin() + b);
     }
     return this->determinant();
