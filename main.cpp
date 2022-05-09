@@ -1,72 +1,32 @@
 #include <iostream>
 #include "Matrix.h"
 
-using std::cout, std::cin;
+using std::cout, std::cin, std::cerr, std::exception;
 
-Matrix matrix_input() {
-    unsigned int m, n;
+void TestAddition() {
+    Matrix m1({{1, 2},{3, 4},{5, 6}});
+    Matrix m2({{0, },{0, -1},{1, 2}});
+    Matrix correct_sum({{1, 3},{3, 3},{6,8}});
+    Matrix diff_size({{1, 2, 3},{3, 4, 2}});
 
-    cout << "Размеры матрицы через пробел: ";
-    cin >> m >> n;
-    cout << "Матрица:\n";
-    Matrix a = Matrix(m, n);
-    for (int i = 0; i < m; ++i) {
-        for (int j = 0; j < n; ++j) {
-            cin >> a(i, j);
+    try {
+        Matrix result = m1 + m2;
+        if (result == correct_sum) {
+            cout << "Test passed: addition test." << "\n";
+        } else {
+            cerr << "Test failed: addition test. Wrong result." << "\n";
         }
+    } catch (exception& ex) {
+        cerr << "Error during addition test." << "\n";
+        cerr << ex.what();
     }
 
-    return a;
+    //Matrix result = m1 + diff_size;
+    //cout << result;
 }
 
-int main() {
-/*    char op;
-    Matrix a = matrix_input();
-    cout << "Оператор(+, -, *, T(транспонирование), D(определитель):\n";
-    cin >> op;
 
-    if (op == '+') {
-        Matrix b = matrix_input();
-        Matrix c = a + b;
-        cout << "Результат:\n";
-        c.print();
-    } else if (op == '-') {
-        Matrix b = matrix_input();
-        Matrix c = a - b;
-        std::cout << "Результат:\n";
-        c.print();
-    } else if (op == '*') {
-        char ch;
-        std::cout << "Умножение на матрицу или на число? (1 - Матрица, 2 - Число)\n";
-        std::cin >> ch;
-        if (ch == '1') {
-            Matrix b = matrix_input();
-            Matrix c = a * b;
-            std::cout << "Результат:\n";
-            c.print();
-        } else if (ch == '2') {
-            int num;
-            std::cout << "Введите число:\n";
-            std::cin >> num;
-            Matrix b = a * num;
-            std::cout << "Результат:\n";
-            b.print();
-        }
-    } else if (op == 'T') {
-        Matrix b = a.transpose();
-        std::cout << "Результат:\n";
-        b.print();
-    } else if (op == 'D') {
-        std::cout << a.determinant();
-    } else if (op == 'I') {
-        Matrix b = a.inverse();
-        b.print();
-    }*/
-/*    Matrix a({{2, -3, 1}, {1, 0, 3}});
-    Matrix b({{-6, 5, 1, 1}, {2, 1, 0, 4}, {7, 1, 2, 5}});*/
-    Matrix a({{1,1}, {1,1}});
-    Matrix c = a * 3;
-    cout << c;
-    //b.print();
+int main() {
+    TestAddition();
     return 0;
 }

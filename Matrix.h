@@ -25,6 +25,8 @@ public:
     Matrix operator-(const Matrix& rhs);
     Matrix operator*(const Matrix& rhs);
 
+    bool operator==(const Matrix& rhs);
+
     Matrix operator*(const double& rhs);
 
     friend ostream& operator<<(ostream& os, const Matrix& matrix);
