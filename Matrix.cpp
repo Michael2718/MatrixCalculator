@@ -59,10 +59,6 @@ Matrix Matrix::operator*(const Matrix &rhs) {
     return result;
 }
 
-bool Matrix::operator==(const Matrix &rhs) {
-    return this->matrix == rhs.matrix;
-}
-
 Matrix Matrix::operator*(const double &rhs) {
     Matrix result(rows, cols);
 

@@ -25,9 +25,10 @@ public:
     Matrix operator-(const Matrix& rhs);
     Matrix operator*(const Matrix& rhs);
 
-    bool operator==(const Matrix& rhs);
-
     Matrix operator*(const double& rhs);
+
+    bool operator==(const Matrix& rhs) {return this->matrix == rhs.matrix;}
+    bool empty() const {return matrix.empty();}
 
     friend ostream& operator<<(ostream& os, const Matrix& matrix);
 
