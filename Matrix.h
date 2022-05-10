@@ -20,7 +20,7 @@ public:
     unsigned int getRows() const {return rows;}
     unsigned int getCols() const {return cols;}
 
-    Matrix& operator=(const Matrix& rhs) {return *this;}
+    Matrix& operator=(const Matrix& rhs);
     Matrix operator+(const Matrix& rhs);
     Matrix operator-(const Matrix& rhs);
     Matrix operator*(const Matrix& rhs);
@@ -36,12 +36,9 @@ public:
     const double& operator()(const unsigned& row, const unsigned& col) const {return this->matrix[row][col];}
 
     Matrix transpose();
-    Matrix inverse();
 
     double determinant();
     double minor(int a, int b);
-
-
 };
 
 #endif

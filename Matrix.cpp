@@ -15,6 +15,15 @@ Matrix::Matrix(vector<vector<double>> v) : matrix(v), rows(v.size()), cols(v[0].
     if (rows < 0 || cols < 0) throw invalid_argument("Invalid matrix size.");
 }
 
+Matrix& Matrix::operator=(const Matrix& rhs) {
+    if (this == &rhs) return *this;
+
+    this->matrix = rhs.matrix;
+    this->rows = rhs.rows;
+    this->cols = rhs.cols;
+    return *this;
+}
+
 Matrix Matrix::operator+(const Matrix &rhs) {
     if(rows != rhs.rows || cols != rhs.cols) throw invalid_argument("Invalid matrix size.");
 
@@ -92,16 +101,6 @@ Matrix Matrix::transpose() {
     }
 
     return result;
-}
-
-Matrix Matrix::inverse() {
-    Matrix adjugate_matrix(rows, cols);
-    for (int i = 0; i < matrix.size(); ++i) {
-        for (int j = 0; j < matrix.size(); ++j) {
-            adjugate_matrix(i, j) = pow(-1, i+j)*this->minor(i, j);
-        }
-    }
-    return adjugate_matrix.transpose();
 }
 
 double Matrix::determinant() {
