@@ -1,6 +1,5 @@
 #include "Matrix.h"
 #include <iostream>
-#include <cmath>
 
 using std::invalid_argument;
 
